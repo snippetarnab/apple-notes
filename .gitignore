@@ -1,0 +1,70 @@
+# =========================
+# OS generated files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Node.js / JavaScript
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build output
+dist/
+build/
+.cache/
+.next/
+out/
+
+# =========================
+# Logs
+# =========================
+logs
+*.log
+*.log.*
+*.out
+*.pid
+*.gz
+
+# =========================
+# Environment files
+# =========================
+.env
+.env.local
+.env.*.local
+
+# =========================
+# IDE / Editors
+# =========================
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# =========================
+# Python (if applicable)
+# =========================
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.eggs/
+*.pyo
+*.pyd
+.venv/
+venv/
+ENV/
+
+# =========================
+# Misc
+# =========================
+coverage/
+*.tgz
+*.tar.gz
+*.zip
