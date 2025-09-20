@@ -10,8 +10,26 @@ app.listen(PORT, () => {
   console.log("server is running on", PORT);
 });
 
+//middleware
+app.use(express.json());
 app.use("/api/applenotes", noteRoutes);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//basic routing for Crud operation
 // app.get("/api/applenotes",(req,res)=>{
 //     res.status(200).json({message:`Note fetches successfully.`})
 // })
