@@ -1,10 +1,11 @@
 import express from "express";
 import noteRoutes from "./routes/noteRoutes.js";
 import { connectDB } from "./config/db.js";
+import rateLimiter from "./middlewares/rateLimiter.js";
 
 const app = express();
 connectDB();
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log("server is running on", PORT);
@@ -12,22 +13,9 @@ app.listen(PORT, () => {
 
 //middleware
 app.use(express.json());
+app.use(rateLimiter);
+
 app.use("/api/applenotes", noteRoutes);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //basic routing for Crud operation
 // app.get("/api/applenotes",(req,res)=>{

@@ -5,10 +5,29 @@ import mongoose from "mongoose";
 //For fetching all notes
 export async function getAllNotes(req, res) {
   try {
-    const notes = await Note.find();
+    const notes = await Note.find().sort({ createdAt: -1 }); // sort by createdAt in descending order
     res.status(200).json(notes);
   } catch (error) {
     console.error("Error in getAllNotes:", error);
+    res.status(500).json({ message: "Internel server error." });
+  }
+}
+
+//Fetching the single note
+export async function getNoteById(req, res) {
+  try {
+    const noteId = req.params.id;
+    // Check if it's a valid ObjectId
+    if (!mongoose.Types.ObjectId.isValid(noteId)) {
+      return res.status(400).json({ message: "Invalid note id format." });
+    }
+    const noteExist = await noteModel.findById(noteId);
+    if (!noteExist) {
+      return res.status(404).json({ message: "Note id is not found." });
+    }
+    return res.json(noteExist);
+  } catch (error) {
+    console.error("Error in getNoteById:", error);
     res.status(500).json({ message: "Internel server error." });
   }
 }
