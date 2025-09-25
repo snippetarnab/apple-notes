@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router";
 import "./App.css";
-import HomePage from "./pages/HomePage";
-import CreatePage from "./pages/CreatePage";
-import DetailPage from "./pages/NoteDetailPage";
+import HomePage from "./pages/HomePage.jsx";
+import CreatePage from "./pages/CreatePage.jsx";
+import NoteDetailPage from "./pages/NoteDetailPage.jsx";
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/create" element={<CreatePage />} />
-        <Route path="/note/:id" element={<DetailPage />} />
+        <Route path="/note/:id" element={<NoteDetailPage />} />
       </Routes>
     </>
   );

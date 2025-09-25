@@ -1,7 +1,11 @@
 import React from "react";
 
 function NoteDetailPage() {
-  return <div>Note</div>;
+  return (
+    <div>
+      <button className="btn">Default</button>
+    </div>
+  );
 }
 
 export default NoteDetailPage;
