@@ -1,4 +1,3 @@
-import axios from "axios";
 import { ArrowLeftIcon, Skull } from "lucide-react";
 import api from "../lib/axios.js";
 import React, { useState } from "react";
