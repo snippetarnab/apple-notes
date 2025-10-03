@@ -17,7 +17,7 @@ function CreatePage() {
     }
     setLoading(true);
     try {
-      await api.post("/applenotes", {
+      await api.post(`/applenotes`, {
         title,
         content,
       });
