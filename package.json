@@ -1,0 +1,21 @@
+{
+  "name": "apple-note-app",
+  "version": "1.0.0",
+  "description": "- Basic routing for Crud Operation.\r ```js",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install --prefix server && npm install --prefix ui && npm run build --prefix ui",
+    "start": "npm run start --prefix server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/snippetarnab/apple-notes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/snippetarnab/apple-notes/issues"
+  },
+  "homepage": "https://github.com/snippetarnab/apple-notes#readme"
+}
