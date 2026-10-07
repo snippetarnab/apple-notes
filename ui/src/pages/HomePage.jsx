@@ -7,9 +7,9 @@ import api from "../lib/axios.js";
 import NoteNotFound from "../components/NoteNotFound.jsx";
 
 function HomePage() {
-  const [isRateLimited, setIsRateLimited] = useState(true);
+  const [isRateLimited, setIsRateLimited] = useState(false);
   const [notes, setNotes] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchNotes = async () => {
@@ -20,7 +20,7 @@ function HomePage() {
         setIsRateLimited(false);
       } catch (error) {
         console.log("Error in fetching notes:", error);
-        if (error.response.status === 429) {
+        if (error.response?.status === 429) {
           setIsRateLimited(true);
         } else {
           toast.error("Failed to fetch notes");

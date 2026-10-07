@@ -25,7 +25,7 @@ function CreatePage() {
       navigate("/");
     } catch (error) {
       console.log("Error creatin gthe notes", error);
-      if (error.response.status === 429) {
+      if (error.response?.status === 429) {
         toast.error("Too many requests. Please try again later.", {
           duration: 4000,
           icon: <Skull />,

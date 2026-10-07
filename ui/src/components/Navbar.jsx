@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
 import { PlusIcon } from "lucide-react";
+import { UserButton } from "@clerk/react";
 
 function Navbar() {
   return (
@@ -15,6 +16,7 @@ function Navbar() {
               <PlusIcon className="w-5 size-5" />
               <span>New Note</span>
             </Link>
+            <UserButton />
           </div>
         </div>
       </div>

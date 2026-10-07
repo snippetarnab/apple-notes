@@ -1,4 +1,5 @@
 import express from "express";
+import { requireAuth } from "@clerk/express";
 import {
   createNote,
   deleteNote,
@@ -9,6 +10,7 @@ import {
 
 const router = express.Router();
 
+router.use(requireAuth());
 router.get("/", getAllNotes);
 router.get("/:id", getNoteById);
 router.post("/", createNote);

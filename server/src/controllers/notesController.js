@@ -1,11 +1,12 @@
 import Note from "../models/Note.js";
-import noteModel from "../models/Note.js";
 import mongoose from "mongoose";
+import { getAuth } from "@clerk/express";
 
 //For fetching all notes
 export async function getAllNotes(req, res) {
   try {
-    const notes = await Note.find().sort({ createdAt: -1 }); // sort by createdAt in descending order
+    const { userId } = getAuth(req);
+    const notes = await Note.find({ userId }).sort({ createdAt: -1 });
     res.status(200).json(notes);
   } catch (error) {
     console.error("Error in getAllNotes:", error);
@@ -16,12 +17,13 @@ export async function getAllNotes(req, res) {
 //Fetching the single note
 export async function getNoteById(req, res) {
   try {
+    const { userId } = getAuth(req);
     const noteId = req.params.id;
     // Check if it's a valid ObjectId
     if (!mongoose.Types.ObjectId.isValid(noteId)) {
       return res.status(400).json({ message: "Invalid note id format." });
     }
-    const noteExist = await noteModel.findById(noteId);
+    const noteExist = await Note.findOne({ _id: noteId, userId });
     if (!noteExist) {
       return res.status(404).json({ message: "Note id is not found." });
     }
@@ -35,9 +37,9 @@ export async function getNoteById(req, res) {
 //For creating a note
 export async function createNote(req, res) {
   try {
+    const { userId } = getAuth(req);
     const { title, content } = req.body;
-    const savedNote = new Note({ title, content });
-    savedNote.save();
+    const savedNote = await new Note({ title, content, userId }).save();
     res.status(201).json(savedNote);
   } catch (error) {
     console.error("Error in createNote:", error);
@@ -48,6 +50,7 @@ export async function createNote(req, res) {
 //For updating a note
 export async function updateNote(req, res) {
   try {
+    const { userId } = getAuth(req);
     const { title, content } = req.body;
     const noteId = req.params.id;
     // Check if it's a valid ObjectId
@@ -55,12 +58,14 @@ export async function updateNote(req, res) {
       return res.status(400).json({ message: "Invalid note id format." });
     }
 
-    const noteIdExist = await noteModel.findById(noteId);
-
-    if (!noteIdExist) {
+    const updatedNote = await Note.findOneAndUpdate(
+      { _id: noteId, userId },
+      { title, content },
+      { new: true, runValidators: true }
+    );
+    if (!updatedNote) {
       return res.status(404).json({ message: "Note id is not found." });
     }
-    await Note.findByIdAndUpdate(noteId, { title, content }, { new: true });
     res.status(200).json({ message: `Note updated successfully.` });
   } catch (error) {
     console.error("Error in updateNote:", error);
@@ -71,18 +76,17 @@ export async function updateNote(req, res) {
 //For deleting a note
 export async function deleteNote(req, res) {
   try {
+    const { userId } = getAuth(req);
     const noteId = req.params.id;
     // Check if it's a valid ObjectId
     if (!mongoose.Types.ObjectId.isValid(noteId)) {
       return res.status(400).json({ message: "Invalid note id format." });
     }
 
-    const noteIdExist = await noteModel.findById(noteId);
-
-    if (!noteIdExist) {
+    const deletedNote = await Note.findOneAndDelete({ _id: noteId, userId });
+    if (!deletedNote) {
       return res.status(404).json({ message: "Note id is not found." });
     }
-    await Note.findByIdAndDelete(noteId);
     res.status(200).json({ message: `Note deleted successfully.` });
   } catch (error) {
     console.error("Error in updateNote:", error);

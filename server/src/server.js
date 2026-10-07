@@ -4,6 +4,7 @@ import { connectDB } from "./config/db.js";
 import rateLimiter from "./middlewares/rateLimiter.js";
 import cors from "cors";
 import path from "path";
+import { clerkMiddleware } from "@clerk/express";
 
 const app = express();
 
@@ -29,6 +30,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 app.use(express.json());
 app.use(rateLimiter);
+app.use("/api", clerkMiddleware());
 
 app.use("/api/applenotes", noteRoutes);
 if (process.env.NODE_ENV === "production") {
@@ -38,4 +40,3 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "../ui", "dist", "index.html"));
   });
 }
-

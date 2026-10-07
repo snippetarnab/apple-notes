@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@clerk/react": "^6.17.6",
     "@tailwindcss/vite": "^4.1.13",
     "apple-note-app": "file:..",
     "axios": "^1.12.2",
