@@ -69,3 +69,4 @@ coverage/
 *.tar.gz
 *.zip
 .env.local
+.env.example
